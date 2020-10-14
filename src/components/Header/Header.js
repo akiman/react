@@ -3,7 +3,7 @@ import React from "react";
 import './header.css';
 import logo from "../../logo.svg";
 
-const Header = () => (
+const Header = (props) => (
     <header className="header">
         <img
             src={logo}
@@ -12,7 +12,7 @@ const Header = () => (
         />
         <nav className="main-nav nav">
             <ul className="list">
-                <li className="item">
+                {/*<li className="item">
                     <a href="/" className="item-link">Falcon 1</a>
                 </li>
                 <li className="item">
@@ -23,7 +23,14 @@ const Header = () => (
                 </li>
                 <li className="item">
                     <a href="/" className="item-link">Updates</a>
-                </li>
+                </li>*/}
+
+                {props.rockets.map((item, i) => (
+                    <li key={i} className="item">
+                        <a href="/" className="item-link">{item}</a>
+                    </li>
+                ))}
+
             </ul>
         </nav>
         <nav className="secondary-nav">

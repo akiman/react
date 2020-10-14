@@ -1,10 +1,12 @@
 import React from "react";
 import './main.css';
 
-const Main = () => (
+const Main = ({rocket}) => {
+
+    return (
     <section className="main">
         <h1 className="title">
-            Falcon 1
+            {rocket}
         </h1>
 
         <div className="video-container">
@@ -12,6 +14,7 @@ const Main = () => (
 
         </div>
     </section>
-);
+    )
+};
 
 export default Main;
