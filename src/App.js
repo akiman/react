@@ -23,13 +23,18 @@ class App extends React.Component {
         rockets: [], // вытаскиваем имена ракет
     };
 
+    changeRocket = rocket => {
+        this.setState({
+            rocket
+        }, this.updateRocket);
+    }
 
     updateRocket() {
         console.log(this.state); // Видим, что сначала пусто
 
         this.fetchData.getRocket()
             .then(data => {
-                this.setState({rockets: data.map(item => item.name)});
+                this.setState({rockets: data.map(item => item.name)}); // попутно получаем имена ракет
                 return data // пробрасываем данные дальше в следующий then
             })
             .then(data => data.find(item => item.name === this.state.rocket))
@@ -45,9 +50,9 @@ class App extends React.Component {
 
         return (
             <>
-                <Header rockets={this.state.rockets}/>
+                <Header rockets={this.state.rockets} changeRocket={this.changeRocket}/>
                 <Main rocket={this.state.rocket}/>
-                <Features/>
+                <Features /> {/*ДЗ вывести рокетФичи и поменять ракету на взлёте*/}
                 <Footer/>
             </>
         );
