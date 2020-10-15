@@ -13,7 +13,7 @@ const Header = (props) => (
         <nav className="main-nav nav">
             <ul className="list">
                 {/*перебор массива ракет с помощью map()*/}
-                {props.rockets.map((item, i) => ( // ссуко стрелочная функция!
+                {props.rockets.map((item, i) => ( // стрелочная функция!
                     <li key={i} className="item">
                         <a
                             href="/"
