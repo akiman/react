@@ -8,12 +8,12 @@ const video = {
     other: 'space',
 }
 
-const Main = ({rocket}) => { // тут вытаскиваем ОДНО свойство, обрамляем {}
+const Main = ({rocket, title}) => {
 
     return (
         <section className="main">
             <h1 className="title">
-                {rocket ? rocket : 'Календарь SpaceX'}
+                {rocket ? rocket : title}
             </h1>
 
             { rocket && <div className="video-container">

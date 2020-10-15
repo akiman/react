@@ -20,6 +20,7 @@ class App extends React.Component {
     componentDidMount() {
         this.updateRocket();
         this.updateCompany();
+        this.updateDetails();
     }
 
     state = {
@@ -28,6 +29,8 @@ class App extends React.Component {
         rocketFeatures: null, // вытаскиваем параметры каждой ракеты
         rockets: [], // вытаскиваем имена ракет
         company: null,
+        launchName: null,
+        launchDetails: null,
     };
 
     changeRocket = rocket => {
@@ -58,6 +61,23 @@ class App extends React.Component {
             .then(company => this.setState({company}));
     }
 
+    changeLaunch = lounchName => {
+        this.setState({
+            lounchName
+        }, this.updateDetails);
+    }
+
+    updateDetails = () => {
+        console.log(this.state); // Видим, что сначала пусто
+
+        this.fetchData.getLaunches()
+            .then(data => data.find(item => item.name === this.state.lounchName))
+            .then(launchDetails => {
+                this.setState({launchDetails});
+                console.log(launchDetails);
+            });
+    }
+
 
     render() {
 
@@ -78,14 +98,15 @@ class App extends React.Component {
                 </Route>
 
                 <Route path='/calendar'>
-                    <Calendar />
+                    <Calendar changeLaunch={this.changeLaunch}/>
                 </Route>
 
                 <Route path='/details'>
-                    <Details />
+                    {this.state.launchDetails && <Details {...this.state.launchDetails}/>}
                 </Route>
 
-                    {this.state.company && <Footer {...this.state.company}/>}
+                {this.state.company && <Footer {...this.state.company}/>}
+
             </BrowserRouter>
         );
     }

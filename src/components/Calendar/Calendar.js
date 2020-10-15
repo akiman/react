@@ -4,7 +4,7 @@ import Main from "../Main/Main";
 import FetchData from "../../service/FetchData";
 import {Link} from "react-router-dom";
 
-const Calendar = () => {
+const Calendar = ({changeLaunch}) => {
 
     const [data, setData] = useState([]);
 
@@ -21,7 +21,7 @@ const Calendar = () => {
     return (
 
         <>
-            <Main/>
+            <Main title='Календарь SpaceX'/>
 
             <section className="calendar">
                 <div className="container">
@@ -36,7 +36,11 @@ const Calendar = () => {
                                         </div>
                                         <div className="launches-content">
                                             <h2 className="launches-title">{item.name}</h2>
-                                            <Link to="/details" className="button launches-details">Подробнее</Link>
+                                            <Link to="/details"
+                                                  onClick={() => {
+                                                      changeLaunch(item.name);
+                                                  }}
+                                                  className="button launches-details">Подробнее</Link>
                                         </div>
                                     </article>
                                 </li>
